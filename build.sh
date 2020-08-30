@@ -72,17 +72,18 @@ function make_dtb {
 }
 
 function make_boot {
-<< COMMENTOUT
 		$TOOLS_DIR/mkbootimg \
-			--kernel $ZIMAGE_DIR/Image.gz-dtb \
-			--os_version "9.0.0" --os_patch_level "2018-11-01" \
-			--cmdline "androidboot.hardware=qcom console=ttyMSM0,115200n8 earlycon=msm_geni_serial,0xA84000 androidboot.hardware=qcom androidboot.console=ttyMSM0 video=vfb:640x400,bpp=32,memsize=3072000 msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 service_locator.enable=1 swiotlb=2048 androidboot.configfs=true firmware_class.path=/vendor/firmware_mnt/image loop.max_part=7 buildvariant=userdebug androidboot.verifiedbootstate=green androidboot.selinux=permissive" \
+			--kernel $ZIMAGE_DIR/Image-dtb \
+			--os_version "10" --os_patch_level "2020-02-01" \
+			--header_version 1 \
+			--cmdline "androidboot.hardware=qcom androidboot.memcg=1 lpm_levels.sleep_disabled=1 video=vfb:640x400,bpp=32,memsize=3072000 msm_rtb.filter=0x237 service_locator.enable=1 swiotlb=2048 loop.max_part=7 androidboot.usbcontroller=a600000.dwc3 oemboot.earlymount=/dev/block/platform/soc/1d84000.ufshc/by-name/oem:/mnt/oem:ext4:ro,barrier=1:wait,slotselect,first_stage_mount buildproduct=griffin_softbank buildid=KUMANO-1.1.0-SOFTBANK-200124-1223 panic_on_err=1 zram.backend=z3fold buildvariant=user androidboot.verifiedbootstate=green" \
 			--base 0x00000000 \
 			--kernel_offset 0x00008000 \
 			--tags_offset 0x00000100 \
 			--pagesize 4096 \
 			--output ${ZIP_MOVE}boot.img
-COMMENTOUT
+		
+		mkdtimg create ${ZIP_MOVE}dtbo.img --page_size=4096 `find out/arch/arm64/boot/dts -name "*.dtbo"`
 
 		cp -vr $ZIMAGE_DIR/Image-dtb ${REPACK_DIR}/zImage
 }
