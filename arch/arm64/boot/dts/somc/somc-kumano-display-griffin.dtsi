@@ -110,6 +110,8 @@
 			qcom,default-topology-index = <0>;
 			qcom,mdss-dsi-panel-phy-timings = [00 21 08 08 25 22 09 08 06 02 04 00 1B 18];
 		};
+		/* Delete FHD timing = always 4K */
+		/delete-node/ timing@0;
 		timing@1 {
 			qcom,display-topology = <2 2 1>;
 			qcom,default-topology-index = <0>;
