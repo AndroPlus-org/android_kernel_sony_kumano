@@ -28,7 +28,7 @@ DEFCONFIG="vendor/sm8150-perf_defconfig"
 DIFFCONFIG="griffin_diffconfig"
 
 # Kernel Details
-VER=".v10"
+VER=".v01"
 
 # Paths
 KERNEL_DIR=`pwd`
