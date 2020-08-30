@@ -986,15 +986,15 @@ static int dsi_panel_parse_timing(struct dsi_mode_info *mode,
 	}
 
 	mode->clk_rate_hz = !rc ? tmp64 : 0;
-	if (tmp64 == 976285440) {
+	if (tmp64 == 1100000000 || tmp64 == 1103000000) {
 		if (framerate_override == 4)
-			mode->clk_rate_hz = 1248300000;
+			mode->clk_rate_hz = 1375000000;
 		else if (framerate_override == 3)
-			mode->clk_rate_hz = 1193300000;
+			mode->clk_rate_hz = 1320000000;
 		else if (framerate_override == 2)
-			mode->clk_rate_hz = 1138300000;
+			mode->clk_rate_hz = 1265000000;
 		else if (framerate_override == 1)
-			mode->clk_rate_hz = 1083300000;
+			mode->clk_rate_hz = 1210000000;
 	} else
 		framerate_override = 1;
 	display_mode->priv_info->clk_rate_hz = mode->clk_rate_hz;
